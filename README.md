@@ -1,5 +1,7 @@
 # League
 
+[![build](https://github.com/github-info-estatico-io/league/actions/workflows/ci.yml/badge.svg)](https://github.com/github-info-estatico-io/league/actions/workflows/ci.yml)
+
 This implementation uses `scala` and `sbt`. It was tested on macOS and Linux
 using JDK 16.
 
