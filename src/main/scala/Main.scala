@@ -227,7 +227,7 @@ object Output {
     // be given the same rank, just shown in alphabetical order. Also,
     // teams which are ranked after such teams must also account for the
     // "missing" ranks. See the README for an example of such a situation.
-    state.iterator.toIndexedSeq
+    state.toSeq
       // First, we sort the state by points descending and then by name.
       .sortBy { case (name, points) => (-points, name.toLowerCase) }
       // We'll use the index as a temporary rank. We'll need to fix this up
@@ -251,7 +251,7 @@ object Output {
       // for those that we skipped.
       .flatMap { seq =>
         val rank = seq.head._2 + 1
-        seq.iterator.map { case ((name, points), _) =>
+        seq.map { case ((name, points), _) =>
           Row(rank, team = name, points)
         }
       }
