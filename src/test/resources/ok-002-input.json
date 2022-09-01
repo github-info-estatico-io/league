@@ -1,0 +1,22 @@
+[
+  {
+    "team1" : {
+      "name" : "Foo",
+      "score" : 12
+    },
+    "team2" : {
+      "name" : "Bar",
+      "score" : 9
+    }
+  },
+  {
+    "team1" : {
+      "name" : "Bar",
+      "score" : 12
+    },
+    "team2" : {
+      "name" : "Baz",
+      "score" : 10
+    }
+  }
+]

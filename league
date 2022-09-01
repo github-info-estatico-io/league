@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+scala_binary_version=2.13
+league_version=$(grep '^version :=' build.sbt | sed 's/^version *:= *"\([^"]*\)"/\1/')
+league_jar=target/scala-$scala_binary_version/league-assembly-$league_version.jar
+
+os=$(uname)
+
+case "$os" in
+  Linux*)   stat_mtime=(stat -c %Y);;
+  Darwin*)  stat_mtime=(stat -f %m);;
+  *)
+    >&2 echo "Unsupported OS: $os"
+    exit 1
+    ;;
+esac
+
+latest_modified_source_timestamp=$(
+  find build.sbt project/{build.properties,plugins.sbt} src/main \
+    -type f \
+    -exec "${stat_mtime[@]}" {} \; \
+    | sort -k3 | sort -nr | head -1
+)
+
+if [ ! -f "$league_jar" ]; then
+  jar_modified_timestamp=0
+else
+  jar_modified_timestamp=$("${stat_mtime[@]}" "$league_jar")
+fi
+
+if [ "$jar_modified_timestamp" -lt "$latest_modified_source_timestamp" ]; then
+  >&2 echo "Source changes detected, recompiling..."
+  sbt assembly
+  exitcode=$?
+  [ "$exitcode" -eq 0 ] || exit "$exitcode"
+  echo
+  echo '---------------'
+  echo
+fi
+
+exec java -jar "$league_jar" "$@"

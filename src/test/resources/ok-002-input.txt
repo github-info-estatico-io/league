@@ -1,0 +1,2 @@
+Foo 12  ,   Bar 9
+Bar 12,Baz 10

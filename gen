@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Generates random inputs for league; useful for testing.
+
+n_rows=${1:-100}
+n_teams=${2:-5}
+max_score=${3:-20}
+
+if [ $# -gt 3 ]; then
+  >&2 echo "Unexpected argument: $4"
+  exit 1
+fi
+
+randint() {
+  echo $(( $RANDOM % $1 + 1 ))
+}
+
+getchr() {
+  printf "\x$(printf %x $((65 + $1)))"
+}
+
+rand_team() {
+  getchr "$(randint "$n_teams")"
+}
+
+rand_score() {
+  randint "$max_score"
+}
+
+rowcount=0
+while [ "$rowcount" -lt "$n_rows" ]; do
+  ((++rowcount))
+  team1=$(rand_team)
+  while true; do
+    team2=$(rand_team)
+    if [ "$team2" != "$team1" ]; then
+      break
+    fi
+  done
+
+  echo "$team1 $(rand_score), $team2 $(rand_score)"
+done

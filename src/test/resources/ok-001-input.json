@@ -1,0 +1,52 @@
+[
+  {
+    "team1" : {
+      "name" : "Lions",
+      "score" : 3
+    },
+    "team2" : {
+      "name" : "Snakes",
+      "score" : 3
+    }
+  },
+  {
+    "team1" : {
+      "name" : "Tarantulas",
+      "score" : 1
+    },
+    "team2" : {
+      "name" : "FC Awesome",
+      "score" : 0
+    }
+  },
+  {
+    "team1" : {
+      "name" : "Lions",
+      "score" : 1
+    },
+    "team2" : {
+      "name" : "FC Awesome",
+      "score" : 1
+    }
+  },
+  {
+    "team1" : {
+      "name" : "Tarantulas",
+      "score" : 3
+    },
+    "team2" : {
+      "name" : "Snakes",
+      "score" : 1
+    }
+  },
+  {
+    "team1" : {
+      "name" : "Lions",
+      "score" : 4
+    },
+    "team2" : {
+      "name" : "Grouches",
+      "score" : 0
+    }
+  }
+]
